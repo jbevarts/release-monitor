@@ -1,6 +1,57 @@
-# Getting Started with Create React App
+# Release monitor v1 design
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Requirements
+- Function:
+  - user can add / remove github repositories to track new releases
+  - user can mark a release as seen
+- Display:
+  - user can see tracked collection of recent releases
+  - user can see most recent release date
+  - user can see when a release is new
+  - tracked releases are sorted by new first
+- Data:
+  - persistence of releases to be stored using Localstorage
+    - each release to be stored
+    - state to be persisted after fetch, reload and after a release has been marked as seen
+
+
+
+- extra: design backend and persistence
+
+## Fetching releases
+- user will input owner and repository name
+- endpoint for fetching release: 
+`/repos/{owner}/{repo}/releases`
+- the data returned contains a possibly empty array of release objects
+- schema: https://docs.github.com/en/free-pro-team@latest/graphql/reference/objects#release
+
+## Persisting State
+- Localstorage used to store release information.  
+
+```
+localStorage.get('release-monitor-data')
+```
+```
+[
+    {
+        owner: microsoft,
+        repository: vscode,
+        seen: true,
+        publishedAt: {date}
+        releaseData: {...}
+    },
+]
+```
+
+## UI
+tbd, react components
+
+## Future Development Considerations
+tbd, backend with eventing architecture, webhooks possibly, need to research
+
+---
+
+
 
 ## Available Scripts
 
@@ -29,42 +80,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

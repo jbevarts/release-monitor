@@ -1,5 +1,16 @@
+import { Octokit } from "@octokit/core";
 import logo from './logo.svg';
 import './App.css';
+
+const octokit = new Octokit();
+octokit.request('GET /repos/{owner}/{repo}/releases', {
+  owner: 'microsoft',
+  repo: 'vscode'
+}).then(
+  (response) => {
+    console.log(response);
+  }
+);
 
 function App() {
   return (
