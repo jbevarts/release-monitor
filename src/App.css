@@ -1,38 +1,107 @@
-.App {
+
+
+.parent_container {
   text-align: center;
+  overflow: hidden;
+  height: 100vh;
+  background-color: darkslategrey;
+}
+.collection_container {
+  
+  height: 80%; 
+  overflow: scroll;
+  padding-top: 2vh;
+  margin-top: 7vh;
+  width: 61vw;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.middle_panel {
+  /* overflow: hidden; */
+  float: left;
+  height: 100vh;
+
+
+}
+.left_panel {
+  float: left;
+  width: 20vw;
+  height: 100vh;
+  padding-top: 3vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.right_panel {
+  float: left;
+  width: 20vw;
+  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button_slide {
+  margin-left: auto;
+  margin-right: auto;
+  height: 5vw;
+  width: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 12px;
+  text-align: center;
+  background: #6DAD53;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: -5px -5px 10px;
+}
+
+.button_inner {
+  position: fixed;
+  top: -250px;
+  background: #6DAD53;
+  width: 14vw;
+  text-align: left;
+  padding: 12px 12px;
+  height: 130px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: -5px -5px 10px;
+
+}
+
+.button_slide:hover {
+  margin-top: 4vh;
+}
+
+.button_slide:hover .button_inner {
+  top: 3vh;
+}
+
+
+.Release {
+  /* text-align: center; */
+  width: 60vw;
+  margin: 0 auto;
+  margin-bottom: 3vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: -2px -2px 6px;
 
-.App-link {
-  color: #61dafb;
-}
+}  
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.release_notes {
+  padding: 2%;
+  box-shadow: -2px -2px 6px;
+  border-radius: 5px 5px 5px 5px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  word-wrap: break-word;
+  white-space: pre-line;
+  width: 80%;
+  height: 80%;
 }
