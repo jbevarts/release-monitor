@@ -63,12 +63,12 @@
 
 .button_inner {
   position: fixed;
-  top: -250px;
+  top: -20vw;
   background: #6DAD53;
   width: 14vw;
   text-align: left;
   padding: 12px 12px;
-  height: 130px;
+  height: 10vw;
   border-radius: 5px 5px 5px 5px;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
