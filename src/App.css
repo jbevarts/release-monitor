@@ -7,13 +7,20 @@
   background-color: darkslategrey;
 }
 .collection_container {
-  
-  height: 80%; 
+
+  height: 80%;
   overflow: scroll;
   padding-top: 2vh;
   margin-top: 7vh;
   width: 61vw;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.collection_container::-webkit-scrollbar {
+  display: none;
+}
+
 
 .middle_panel {
   /* overflow: hidden; */
@@ -92,7 +99,13 @@
   border-radius: 5px 5px 5px 5px;
   box-shadow: -2px -2px 6px;
 
-}  
+}
+.release_banner {
+  overflow: hidden;
+  max-height: 20vh;
+  height: 100%;
+  background-color: aqua;
+}
 
 .release_notes {
   padding: 2%;
@@ -104,4 +117,10 @@
   white-space: pre-line;
   width: 80%;
   height: 80%;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.release_notes::-webkit-scrollbar {
+  display: none;
 }
