@@ -1,13 +1,13 @@
 import { Component } from 'react';
-// import router from 'react-router';
 import { Octokit } from "@octokit/core";
 import ButtonForm from "./Components/ButtonForm";
-import { FaSearchPlus } from 'react-icons/fa';
-import Release from './Components/Release'
+import { ImSearch } from 'react-icons/im';
+import { IoReload } from 'react-icons/io5';
+import Release from './Components/Release';
 import './App.css';
 
 const octokit = new Octokit();
-// localStorage.clear();
+
 class App extends Component {
 
   constructor(props) {
@@ -27,7 +27,7 @@ class App extends Component {
     localStorage.setItem('release-monitor-data', JSON.stringify(array));
   }
 
-  handleSubmit = (event) => { //  remove logic and test with dummy
+  handleSubmit = (event) => { 
     event.preventDefault();
 
     let owner = event.target[0].value;
@@ -63,17 +63,9 @@ class App extends Component {
     this.setState({data: releaseData});
     localStorage.setItem('release-monitor-data', JSON.stringify(releaseData));
   }
-  componentDidUpdate(prevState) {
-    console.log("component udating");
-    console.log(prevState);
-    console.log(this.state.data[0]);
-  }
 
   handleReload(event) {
-    // event.preventDefault();
-    //this.updateState(null);
     this.handleReloadHelper(event);
-    console.log("outer wrapper");
   }
 
   handleReloadHelper(event) {
@@ -92,37 +84,19 @@ class App extends Component {
             newElem.releaseNotes = response.data[0].body;
             newElem.id = response.data[0].id;
             newElem.seen = false;
-            //tempState.data.push(elem);
-            console.log(elem.seen);
             return newElem;
           } else {
             let newElem = elem;
             return newElem;
-            //tempState.data.push(elem);
           }
         })
       )
     });
     Promise.all(promises).then((finishedPromises) => {
-      let stateArray = [];
-      // promises.forEach((elem,index) => {
-      //   elem.then((response) => {
-      //     console.log(" inside here" + response);
-      //     stateArray.push(response);
-      //   }).then(() => {
-      //     if (index === promises.length - 1) {
-      //       this.updateState(stateArray);
-      //       console.log('update baby');
-      //     }
-      //   })
-      // });
-        console.log(finishedPromises);
-        this.handleShuffle(finishedPromises);
-        this.updateState(finishedPromises);
-        window.location.reload();
-        console.log("end of update function");
+      this.handleShuffle(finishedPromises);
+      this.updateState(finishedPromises);
+      window.location.reload();
     });
-    console.log("exiting");
 }
 
 handleShuffle(array) {
@@ -133,7 +107,17 @@ handleShuffle(array) {
       return 1;
     } else if (b.seen) {
       return -1;
+    } else {
+      return 0;
     }
+  })
+}
+
+handleCollection() {
+  let data = this.state.data;
+  this.handleShuffle(data);
+  return data.map((release, index) => {
+    return <Release {... release} handleReleaseClick={this.handleSeen.bind(this)} key={release.id} />
   })
 }
 
@@ -142,7 +126,7 @@ handleShuffle(array) {
       <div className='parent_container'>
         <div className='left_panel'>
           <div className='button_slide'>
-            <FaSearchPlus size={36} />
+            <ImSearch size={80} />
             <div className="button_inner">
               <ButtonForm handleSubmit={this.handleSubmit} />
             </div>
@@ -150,14 +134,14 @@ handleShuffle(array) {
         </div>
         <div className='middle_panel'>
           <div className='collection_container'>
-            {null === this.state.data ? "no data" : 
-            this.state.data.map((release, index) => {
-              return <Release {... release} handleReleaseClick={this.handleSeen.bind(this)} key={release.id} />
-            })}
+            {null === this.state.data ? "no data" : this.handleCollection()}
           </div>
         </div>
-        <button onClick={this.handleReload.bind(this)}>some text int he div</button>
-        <div className='right_panel'></div>
+        <div className='right_panel'>
+          <div className='refresh_button' onClick={this.handleReload.bind(this)}>
+          <IoReload size={100} style={{float: 'left'}}/>
+          </div>
+        </div>
       </div>
     );
   }
