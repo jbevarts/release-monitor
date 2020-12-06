@@ -5,7 +5,6 @@ class ButtonForm extends Component {
   constructor(props) {
     super(props);
     this.state = {name: '', repository: ''};
-    // this.handleSubmit = props.handleSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleRepoChange = this.handleRepoChange.bind(this);
   }

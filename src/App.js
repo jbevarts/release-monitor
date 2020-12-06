@@ -7,7 +7,7 @@ import Release from './Components/Release';
 import './App.css';
 
 const octokit = new Octokit();
-
+// localStorage.clear();
 class App extends Component {
 
   constructor(props) {
@@ -17,11 +17,11 @@ class App extends Component {
   }
 
 
-  handleSeen = (id) => {
-    let seen = this.state.data.find((elem) => elem.id === id);
+  handleSeen = (state) => {
+    let seen = this.state.data.find((elem) => elem.id === state.id);
     seen.seen = true;
     let array = this.state.data;
-    let index = array.findIndex((elem) => elem.id === id);
+    let index = array.findIndex((elem) => elem.id === state.id);
     array.splice(index, 1, seen);
     this.setState({data: array});
     localStorage.setItem('release-monitor-data', JSON.stringify(array));
@@ -48,7 +48,8 @@ class App extends Component {
               repository: repo,
               id: response.data[0].id,
               seen: false,
-              releaseNotes: response.data[0].body
+              releaseNotes: response.data[0].body,
+              selected: false
             }];
           releaseData = newData.concat(releaseData);
         
@@ -113,11 +114,19 @@ handleShuffle(array) {
   })
 }
 
+handleRemove(id) {
+  console.log("trying to remove");
+  let stateData = this.state.data;
+  stateData = stateData.filter((elem) => elem.id !== id);
+  this.updateState(stateData);
+}
+
 handleCollection() {
   let data = this.state.data;
+  //if (!data.some((elem) => elem.selected === true )) { this.handleShuffle(data); }
   this.handleShuffle(data);
   return data.map((release, index) => {
-    return <Release {... release} handleReleaseClick={this.handleSeen.bind(this)} key={release.id} />
+    return <Release {... release} handleReleaseClick={this.handleSeen.bind(this)} handleRemove={this.handleRemove.bind(this)} key={release.id} />
   })
 }
 

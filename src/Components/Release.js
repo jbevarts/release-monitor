@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { GoTag } from 'react-icons/go';
-import { IoCloseSharp } from 'react-icons/io5';
 import { MdFiberNew } from 'react-icons/md'
 import { FcCancel } from 'react-icons/fc'
 
@@ -10,11 +9,10 @@ class Release extends Component {
     super(props);
     this.state = {
       color: !props.seen ? 'linear-gradient(to left, #dfaa3a, #dfaa3a)' : 'linear-gradient(to left, #565996, #9d9fc7)',
-
       owner: props.owner, 
       repository: props.repository, 
       seen: props.seen, 
-      selected: false, 
+      selected: props.selected, 
       id: props.id, 
       height: '20vh',
       releaseNotes: props.releaseNotes
@@ -22,13 +20,16 @@ class Release extends Component {
   }
 
   handleClick = () => {
-
+    !this.state.selected ? this.setState({selected: true, height: '50%'}) : this.setState({selected: false, height: '20vh'})
     if (!this.state.seen) {
-      this.props.handleReleaseClick(this.state.id);
+      this.props.handleReleaseClick(this.state);
       this.setState({color: 'linear-gradient(to left, #565996, #9d9fc7)', seen: true})
     }
-    !this.state.selected ? this.setState({selected: true, height: '50%'}) : this.setState({selected: false, height: '20vh'})
 
+  }
+
+  handleRemove = (event) => {
+    this.props.handleRemove(this.state.id);
   }
 
   render() {
@@ -44,7 +45,7 @@ class Release extends Component {
                 <div className='label'>{this.state.owner}</div>
                 <div className='label'>{this.state.repository}</div>
               </div>
-              <div className='release_right_panel'><FcCancel size={30}/>
+              <div className='release_right_panel'><div onClick={this.handleRemove.bind(this)}><FcCancel size={30} /></div>
               </div>
             </div>}
             
