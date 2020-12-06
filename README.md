@@ -20,9 +20,7 @@
 
 ## Fetching releases
 - user will input owner and repository name
-- endpoint for fetching release: 
-`/repos/{owner}/{repo}/releases`
-- the data returned contains a possibly empty array of release objects
+- the data is fetched, possibly returning an empty array of release objects
 - schema: https://docs.github.com/en/free-pro-team@latest/graphql/reference/objects#release
 
 ## Persisting State
@@ -37,17 +35,30 @@ localStorage.get('release-monitor-data')
         owner: microsoft,
         repository: vscode,
         seen: true,
-        publishedAt: {date}
-        releaseData: {...}
+        id: <release_id>
+        releaseNotes: {...}
     },
 ]
 ```
 
 ## UI
-tbd, react components
+There were different UI considerations made.  First of all, usage of real estate on screen for this particular feature is best used for visualizing whether or not a release is new.  Therefore, the design I ended up with emphasized the visualization of the releases and only onClick does it expose the underlying release notes.  A former design had a large portion of the screen real estate dedicated to a possibly blank release notes view, and i found that sub-optimal.
 
 ## Future Development Considerations
-tbd, backend with eventing architecture, webhooks possibly, need to research
+Future Work:
+- determine overlapping and resize logic for mobile and dated browsers
+- possibly add more features and data to be stored from github
+- clean up and decompose CSS
+- improve smart and dumb component architecture and data flow
+- gut localStorage
+- setup cosmos db in azure
+- ( not in js or ts )build event trigger function app in azure that that persists data to cosmos from github webhook events
+-- eventually, if services were connected, we may introduce event grid for distributed consistency
+- ( not in js or ts )build crud function app in azure with access to cosmos db
+- use backend apis to manage state of web app.
+- create unit, sanity, and integration tests with mocking of apis enabled and disabled.
+- eventually, not in js or ts, recreate frontend logic and migrate away from js or ts.  Not needed by desired.
+-- this feature could be a widget, and it also could be entirely replaced by properly integrating with github dependency graph within your organization...
 
 ---
 
