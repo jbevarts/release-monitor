@@ -196,6 +196,7 @@
 
 .label {
   overflow: visible;
+  margin-bottom: 10%;
   vertical-align: top;
   height: 25%;
   display: inline-block;
