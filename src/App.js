@@ -13,6 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     var releaseMonitorData = JSON.parse(localStorage.getItem('release-monitor-data'));
+    console.log(releaseMonitorData);
     this.state = {data: releaseMonitorData};
   }
 
@@ -135,21 +136,24 @@ handleCollection() {
       <div className='parent_container'>
         <div className='left_panel'>
           <div className='button_slide'>
-            <ImSearch size={80} />
+            <ImSearch size={40} />
             <div className="button_inner">
               <ButtonForm handleSubmit={this.handleSubmit} />
             </div>
           </div>
+          <div className='refresh_button' onClick={this.handleReload.bind(this)}>
+            <IoReload size={100} style={{float: 'left'}}/>
+          </div>
         </div>
         <div className='middle_panel'>
           <div className='collection_container'>
-            {null === this.state.data ? "no data" : this.handleCollection()}
+            {(null === this.state.data || this.state.data.length === 0) ? "Track github releases by owner and repository name" : this.handleCollection()}
           </div>
         </div>
         <div className='right_panel'>
-          <div className='refresh_button' onClick={this.handleReload.bind(this)}>
-          <IoReload size={100} style={{float: 'left'}}/>
-          </div>
+          {/*<div className='refresh_button' onClick={this.handleReload.bind(this)}>*/}
+          {/*  <IoReload size={100} style={{float: 'left'}}/>*/}
+          {/*</div>*/}
         </div>
       </div>
     );

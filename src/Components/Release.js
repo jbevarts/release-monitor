@@ -14,13 +14,13 @@ class Release extends Component {
       seen: props.seen, 
       selected: props.selected, 
       id: props.id, 
-      height: '20vh',
+      height: '12vh',
       releaseNotes: props.releaseNotes
     };
   }
 
   handleClick = () => {
-    !this.state.selected ? this.setState({selected: true, height: '50%'}) : this.setState({selected: false, height: '20vh'})
+    !this.state.selected ? this.setState({selected: true, height: '50%'}) : this.setState({selected: false, height: '12vh'})
     if (!this.state.seen) {
       this.props.handleReleaseClick(this.state);
       this.setState({color: 'linear-gradient(to left, #565996, #9d9fc7)', seen: true})
@@ -42,7 +42,7 @@ class Release extends Component {
                 {this.state.seen === false ? <MdFiberNew size={55}/> : null }
               </div>
               <div className='release_middle_panel'>
-                <div className='label'>{this.state.owner}</div>
+                <div className='label'>{this.state.owner}</div><br />
                 <div className='label'>{this.state.repository}</div>
               </div>
               <div className='release_right_panel'><div onClick={this.handleRemove.bind(this)}><FcCancel size={30} /></div>
