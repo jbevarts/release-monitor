@@ -1,6 +1,6 @@
 # Release monitor v1 design
 
-## Requirements
+## Overview
 - Function:
   - user can add / remove github repositories to track new releases
   - user can mark a release as seen
@@ -14,9 +14,6 @@
     - each release to be stored
     - state to be persisted after fetch, reload and after a release has been marked as seen
 
-
-
-- extra: design backend and persistence
 
 ## Fetching releases
 - user will input owner and repository name
