@@ -47,6 +47,7 @@ There were different UI considerations made.  First of all, usage of real estate
 ## Future Development Considerations
 Future Work:
 - determine overlapping and resize logic for mobile and dated browsers
+- bug fix re-sort while release notes view is open
 - possibly add more features and data to be stored from github
 - clean up and decompose CSS
 - improve smart and dumb component architecture and data flow
