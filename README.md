@@ -35,8 +35,9 @@ localStorage.get('release-monitor-data')
         owner: microsoft,
         repository: vscode,
         seen: true,
-        id: <release_id>
-        releaseNotes: {...}
+        id: <release_id>,
+        releaseNotes: <body of release notes>,
+        releaseDate: <publish date>
     },
 ]
 ```
