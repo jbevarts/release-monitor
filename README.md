@@ -48,6 +48,8 @@ There were different UI considerations made.  First of all, usage of real estate
 ## Future Development Considerations
 Future Work:
 - determine overlapping and resize logic for mobile and dated browsers
+- proper error handling and input sanitization
+- improve color scheme and overall feel
 - possibly add more features and data to be stored from github
 - clean up and decompose CSS
 - improve smart and dumb component architecture and data flow
@@ -60,8 +62,6 @@ Future Work:
 - create unit, sanity, and integration tests with mocking of apis enabled and disabled.
 - eventually, not in js or ts, recreate frontend logic and migrate away from js or ts.  Not needed by desired.
 -- this feature could be a widget, and it also could be entirely replaced by properly integrating with github dependency graph within your organization...
-
----
 
 
 
