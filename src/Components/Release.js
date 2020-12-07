@@ -19,13 +19,30 @@ class Release extends Component {
     };
   }
 
-  handleClick = () => {
-    !this.state.selected ? this.setState({selected: true, height: '50%'}) : this.setState({selected: false, height: '12vh'})
-    if (!this.state.seen) {
-      this.props.handleReleaseClick(this.state);
-      this.setState({color: 'linear-gradient(to left, #565996, #9d9fc7)', seen: true})
+  handleClick = (e) => {
+    if (e.target.parentElement.className.baseVal === 'cancel' || e.target.parentElement.className === 'release_right_panel') {
+      this.handleRemove(e);
+    } else {
+      let selected, height, seen, color;
+      
+      if (!this.state.selected) {
+        selected = true;
+        height = '50%';
+      } else {
+        selected = false;
+        height = '12vh';
+      }
+      
+      if (!this.state.seen) {
+        color = 'linear-gradient(to left, #565996, #9d9fc7)';
+        seen = true;
+      } else {
+        color = this.state.color;
+        seen = true;
+      }
+      this.props.handleReleaseClick(this.state.seen, this.state.selected, this.state.id);
+      this.setState({color: color, seen: seen, height: height, selected: selected});
     }
-
   }
 
   handleRemove = (event) => {
@@ -45,7 +62,8 @@ class Release extends Component {
                 <div className='label'>{this.state.owner}</div><br />
                 <div className='label'>{this.state.repository}</div>
               </div>
-              <div className='release_right_panel'><div onClick={this.handleRemove.bind(this)}><FcCancel size={30} /></div>
+              <div className='release_right_panel'>
+                <FcCancel className='cancel' size={30} />
               </div>
             </div>}
             

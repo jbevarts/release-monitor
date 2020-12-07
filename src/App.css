@@ -8,7 +8,6 @@
   overflow: hidden;
   height: 100vh;
   background-image: linear-gradient(to top, #a9c2af , #c5d1c7);
-  /* background-color: #a9c2af; */
 }
 .collection_container {
 
@@ -18,7 +17,6 @@
   margin-top: 4vh;
   padding-left: 2vw;
   padding-right: 2vw;
-  /* width: 45vw; */
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -29,7 +27,6 @@
 
 
 .middle_panel {
-  /* overflow: hidden; */
   float: left;
   height: 100vh;
 
@@ -40,11 +37,6 @@
   width: 15vw;
   height: 100vh;
   padding-top: 3vh;
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  /* background-color: red; */
 
 }
 
@@ -53,7 +45,6 @@
   width: 19vw;
   padding-top: 3vh;
   height: 100vh;
-  /* background-color: darkslategrey; */
 
 }
 
@@ -75,9 +66,12 @@
   transition-duration: 0.3s;
   border-radius: 5px 5px 5px 5px;
   box-shadow: -5px -5px 10px;
+  border:1px solid black;
+
 }
 
 .button_slide {
+  border:1px solid black;
   margin-left: auto;
   margin-right: auto;
   height: 5vh;
@@ -97,13 +91,13 @@
 }
 
 .button_inner {
+  border:1px solid black;
   position: fixed;
   top: -500px;
   background: #95ab9a;
   width: 8vw;
   text-align: left;
   padding: 12px 12px;
-  /* height: 4vw; */
   border-radius: 5px 5px 5px 5px;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
@@ -125,7 +119,6 @@
 
 
 .release {
-  /* text-align: center; */
   width: 30vw;
   margin: 0 auto;
   margin-bottom: 3vh;
@@ -135,11 +128,10 @@
   justify-content: center;
   border-radius: 5px 5px 5px 5px;
   box-shadow: -5px -5px 10px;
+  border:1px solid black;
 
 }
 .release_banner {
-  /* background-color: red; */
-  /* overflow: visible; */
   max-height: 20vh;
   height: 98%;
   width: 98%;
@@ -167,7 +159,6 @@
   float: left;
   height: 90%;
   margin-right: 10%;
-  /* background-color: blue; */
   width: 20%;
   display: flex;
   flex-direction: column;
@@ -180,16 +171,13 @@
   height: 90%;
   width: 35%;
   justify-content: left;
-  /* background-color: green; */
 
 }
 
 .release_right_panel {
   float: right;
-  /* height: 90%; */
+  height: inherit;
   justify-content: right;
-  /* background-color: black; */
-  /* border:1px solid black; */
 
 
 }

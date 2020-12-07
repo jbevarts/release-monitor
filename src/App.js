@@ -7,25 +7,26 @@ import Release from './Components/Release';
 import './App.css';
 
 const octokit = new Octokit();
-// localStorage.clear();
 class App extends Component {
 
   constructor(props) {
     super(props);
     var releaseMonitorData = JSON.parse(localStorage.getItem('release-monitor-data'));
-    console.log(releaseMonitorData);
-    this.state = {data: releaseMonitorData};
+    this.state = {data: releaseMonitorData, shuffle: true};
   }
 
 
-  handleSeen = (state) => {
-    let seen = this.state.data.find((elem) => elem.id === state.id);
-    seen.seen = true;
-    let array = this.state.data;
-    let index = array.findIndex((elem) => elem.id === state.id);
-    array.splice(index, 1, seen);
-    this.setState({data: array});
-    localStorage.setItem('release-monitor-data', JSON.stringify(array));
+  handleSeen = (seen, selected, id) => {
+    if (!seen) {
+      let seenElem = this.state.data.find((elem) => elem.id === id);
+      seenElem.seen = true;
+      let array = this.state.data;
+      let index = array.findIndex((elem) => elem.id === id);
+      array.splice(index, 1, seenElem);
+      this.updateState(array, selected);
+    } else {
+      this.updateState(this.state.data, selected);
+    }
   }
 
   handleSubmit = (event) => { 
@@ -55,14 +56,14 @@ class App extends Component {
           releaseData = newData.concat(releaseData);
         
         } 
-        this.updateState(releaseData);
+        this.updateState(releaseData, true);
       }
     })
     .catch((err) => console.log(err));
   }
 
-  updateState = (releaseData) => {
-    this.setState({data: releaseData});
+  updateState = (releaseData, shuffle) => {
+    this.setState({data: releaseData, shuffle: shuffle});
     localStorage.setItem('release-monitor-data', JSON.stringify(releaseData));
   }
 
@@ -96,7 +97,7 @@ class App extends Component {
     });
     Promise.all(promises).then((finishedPromises) => {
       this.handleShuffle(finishedPromises);
-      this.updateState(finishedPromises);
+      this.updateState(finishedPromises, true);
       window.location.reload();
     });
 }
@@ -116,16 +117,14 @@ handleShuffle(array) {
 }
 
 handleRemove(id) {
-  console.log("trying to remove");
   let stateData = this.state.data;
   stateData = stateData.filter((elem) => elem.id !== id);
-  this.updateState(stateData);
+  this.updateState(stateData, true);
 }
 
 handleCollection() {
   let data = this.state.data;
-  //if (!data.some((elem) => elem.selected === true )) { this.handleShuffle(data); }
-  this.handleShuffle(data);
+  if (this.state.shuffle === true) { this.handleShuffle(data); }
   return data.map((release, index) => {
     return <Release {... release} handleReleaseClick={this.handleSeen.bind(this)} handleRemove={this.handleRemove.bind(this)} key={release.id} />
   })
@@ -147,13 +146,10 @@ handleCollection() {
         </div>
         <div className='middle_panel'>
           <div className='collection_container'>
-            {(null === this.state.data || this.state.data.length === 0) ? "Track github releases by owner and repository name" : this.handleCollection()}
+            {(null === this.state.data || this.state.data.length === 0) ? "Track github releases.  Refresh to check for updates" : this.handleCollection()}
           </div>
         </div>
         <div className='right_panel'>
-          {/*<div className='refresh_button' onClick={this.handleReload.bind(this)}>*/}
-          {/*  <IoReload size={100} style={{float: 'left'}}/>*/}
-          {/*</div>*/}
         </div>
       </div>
     );
