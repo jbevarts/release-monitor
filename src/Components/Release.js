@@ -15,9 +15,17 @@ class Release extends Component {
       selected: props.selected, 
       id: props.id, 
       height: '12vh',
-      releaseNotes: props.releaseNotes
+      releaseNotes: props.releaseNotes,
+      releaseDate: this.handleReleaseDate(props.releaseDate)
     };
   }
+
+  handleReleaseDate(releaseDate) {
+    var d = new Date(releaseDate);
+    console.log(releaseDate);
+    return d.toDateString();
+  }
+
 
   handleClick = (e) => {
     if (e.target.parentElement.className.baseVal === 'cancel' || e.target.parentElement.className === 'release_right_panel') {
@@ -59,8 +67,11 @@ class Release extends Component {
                 {this.state.seen === false ? <MdFiberNew size={55}/> : null }
               </div>
               <div className='release_middle_panel'>
-                <div className='label'>{this.state.owner}</div><br />
-                <div className='label'>{this.state.repository}</div>
+                <div className='label'>
+                  Creator: {this.state.owner}<br />
+                  Repository: {this.state.repository}<br />
+                  Published: {this.state.releaseDate}
+                </div>
               </div>
               <div className='release_right_panel'>
                 <FcCancel className='cancel' size={30} />

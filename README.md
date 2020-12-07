@@ -52,8 +52,8 @@ Future Work:
 - improve smart and dumb component architecture and data flow
 - gut localStorage
 - setup cosmos db in azure
-- ( not in js or ts )build event trigger function app in azure that that persists data to cosmos from github webhook events
--- eventually, if services were connected, we may introduce event grid for distributed consistency
+- ( not in js or ts )build event trigger function app in azure that persists data to cosmos from github webhook events
+-- eventually, if sibling services require events, can introduce event grid for distributed consistency
 - ( not in js or ts )build crud function app in azure with access to cosmos db
 - use backend apis to manage state of web app.
 - create unit, sanity, and integration tests with mocking of apis enabled and disabled.

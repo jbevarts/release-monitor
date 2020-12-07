@@ -51,7 +51,8 @@ class App extends Component {
               id: response.data[0].id,
               seen: false,
               releaseNotes: response.data[0].body,
-              selected: false
+              selected: false,
+              releaseDate: response.data[0].published_at
             }];
           releaseData = newData.concat(releaseData);
         
