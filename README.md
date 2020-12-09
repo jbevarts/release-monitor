@@ -57,7 +57,6 @@ Future Work:
 - ( not in js or ts )build crud function app in azure with access to cosmos db
 - use backend apis to manage state of web app.
 - create unit, sanity, and integration tests with mocking of apis enabled and disabled.
-- eventually, not in js or ts, recreate frontend logic and migrate away from js or ts.  Not needed by desired.
 -- this feature could be a widget, and it also could be entirely replaced by properly integrating with github dependency graph within your organization...
 
 
